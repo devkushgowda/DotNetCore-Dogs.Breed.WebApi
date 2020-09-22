@@ -1,7 +1,10 @@
 ﻿using System.Linq;
 using Dogs.Breed.WebApi.HelperClasses;
+using Dogs.Breed.WebApi.ML;
+using Dogs.Breed.WebApi.ML.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.ML;
 using MongoDB.Driver;
 
 namespace Dogs.Breed.WebApi.Controllers
@@ -11,10 +14,11 @@ namespace Dogs.Breed.WebApi.Controllers
     public class DogStoreController : ControllerBase
     {
         private readonly ILogger<DogStoreController> _logger;
-
-        public DogStoreController(ILogger<DogStoreController> logger)
+        private readonly PredictionEnginePool<DogTrainInput, MlPredictionOutput> _predictionEnginePool;
+        public DogStoreController(ILogger<DogStoreController> logger, PredictionEnginePool<DogTrainInput, MlPredictionOutput> predictionEnginePool)
         {
             _logger = logger;
+            _predictionEnginePool = predictionEnginePool;
         }
 
         [HttpGet]
@@ -22,6 +26,18 @@ namespace Dogs.Breed.WebApi.Controllers
         {
             var res = DogDataStore.GetProfiles();
             return Ok(new { Count = res.Count(), Profiles = res });
+        }
+
+        [HttpGet]
+        [Route("ml/{input}")]
+        public object MlFind(string input)
+        {
+            var id = _predictionEnginePool.Predict(nameof(DogsPredictionEngine), new DogTrainInput { Text = input })._id;
+            var res = DogDataStore.ProfilebyId(id);
+            if (res != null)
+                return Ok(res);
+            else
+                return Ok($"No prediction for input : '{input}' .");
         }
 
         [HttpGet]

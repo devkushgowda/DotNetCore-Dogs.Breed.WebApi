@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Dogs.Breed.WebApi.ML;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace Dogs.Breed.WebApi
 {
@@ -14,6 +8,7 @@ namespace Dogs.Breed.WebApi
     {
         public static void Main(string[] args)
         {
+            //Task.Factory.StartNew(() => new DogsTrainingEngine().BuildAndSaveModel());
             CreateWebHostBuilder(args).Build().Run();
         }
 
