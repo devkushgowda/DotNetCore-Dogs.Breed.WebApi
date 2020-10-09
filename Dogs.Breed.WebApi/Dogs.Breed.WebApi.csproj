@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <NoWin32Manifest>true</NoWin32Manifest>
+    <UserSecretsId>35252ce4-6a93-414e-b1b1-85affeb81a6a</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,12 @@
     <PackageReference Include="Microsoft.ML.Recommender" Version="0.17.2" />
     <PackageReference Include="MongoDB.Driver" Version="2.11.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="data\dogstrainingengine.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

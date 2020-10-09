@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
 using Dogs.Breed.WebApi.HelperClasses;
 using Dogs.Breed.WebApi.ML;
 using Dogs.Breed.WebApi.ML.Interfaces;
@@ -38,6 +40,25 @@ namespace Dogs.Breed.WebApi.Controllers
                 return Ok(res);
             else
                 return Ok($"No prediction for input : '{input}' .");
+        }
+
+        [HttpGet]
+        [Route("ml/build")]
+        public object MlBuild(string input)
+        {
+
+            var trainingModel = new DogsTrainingEngine();
+            if (System.IO.File.Exists(trainingModel.ModelOutputPath))
+            {
+                return Ok($"Succesful.\nTrained model already available.");
+            }
+            else
+            {
+                DateTime start = DateTime.Now;
+                trainingModel.BuildAndSaveModel();
+                DateTime end = DateTime.Now;
+                return Ok($"Succesful.\nTime taken:{(end - start).TotalSeconds} seconds.");
+            }
         }
 
         [HttpGet]

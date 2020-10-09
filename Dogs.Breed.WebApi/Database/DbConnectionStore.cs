@@ -12,7 +12,7 @@ namespace Dogs.Breed.WebApi.Database
 
         public const string DogStoreDbName = "dogstore";
 
-        private const string Password = "password";
+        private const string Password = "Kush@143";
 
         private const string Endpoint = "cluster0.0xitl.mongodb.net/dogstore?retryWrites=true&w=majority";
 
