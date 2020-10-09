@@ -31,7 +31,7 @@ namespace Dogs.Breed.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("ml/{input}")]
+        [Route("ml/predict/{input}")]
         public object MlFind(string input)
         {
             var id = _predictionEnginePool.Predict(nameof(DogsPredictionEngine), new DogTrainInput { Text = input })._id;
@@ -48,17 +48,17 @@ namespace Dogs.Breed.WebApi.Controllers
         {
 
             var trainingModel = new DogsTrainingEngine();
-            if (System.IO.File.Exists(trainingModel.ModelOutputPath))
-            {
-                return Ok($"Succesful.\nTrained model already available.");
-            }
-            else
-            {
-                DateTime start = DateTime.Now;
-                trainingModel.BuildAndSaveModel();
-                DateTime end = DateTime.Now;
-                return Ok($"Succesful.\nTime taken:{(end - start).TotalSeconds} seconds.");
-            }
+            //if (System.IO.File.Exists(trainingModel.ModelOutputPath))
+            //{
+            //    return Ok($"Succesful.\nTrained model already available.");
+            //}
+            //else
+            //{
+            DateTime start = DateTime.Now;
+            trainingModel.BuildAndSaveModel();
+            DateTime end = DateTime.Now;
+            return Ok($"Succesful.\nTime taken:{(end - start).TotalSeconds} seconds.");
+            //}
         }
 
         [HttpGet]
