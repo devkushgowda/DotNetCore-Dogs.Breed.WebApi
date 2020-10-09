@@ -37,7 +37,7 @@ namespace Dogs.Breed.WebApi.ML
                     result.Add(new DogTrainInput { _id = trainData.Id, Text = trainData.Name });
                     trainData.Description.ForEach(text => result.Add(new DogTrainInput { _id = trainData.Id, Text = text }));
                     trainData.MoreAbout.ForEach(moreAbouts => moreAbouts.Information.ForEach(moreAbout => result.Add(new DogTrainInput { _id = trainData.Id, Text = moreAbout })));
-                    trainData.VitalStats.ForEach(vitalStats => result.Add(new DogTrainInput { _id = trainData.Id, Text = vitalStats.Title + vitalStats.Value }));
+                    //trainData.VitalStats.ForEach(vitalStats => result.Add(new DogTrainInput { _id = trainData.Id, Text = vitalStats.Title + vitalStats.Value }));
                 }
                 );
             return result;
