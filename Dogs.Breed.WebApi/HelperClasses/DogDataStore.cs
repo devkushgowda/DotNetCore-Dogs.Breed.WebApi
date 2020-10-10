@@ -24,9 +24,9 @@ namespace Dogs.Breed.WebApi.HelperClasses
 
         public static IEnumerable<DogModel> GetProfiles() => store.Value;
 
-        public static DogModel ProfilebyId(string id) => store.Value.FirstOrDefault(dog => id == dog.Id);
+        public static DogModel ProfilebyId(string id) => store.Value.FirstOrDefault(dog => id.Equals(dog.Id, StringComparison.InvariantCultureIgnoreCase));
 
-        public static IEnumerable<String> GetImages(string id) => store.Value.FirstOrDefault(dog => id == dog.Id).ImagesUrls;
+        public static IEnumerable<String> GetImages(string id) => store.Value.FirstOrDefault(dog => id.Equals(dog.Id, StringComparison.InvariantCultureIgnoreCase)).ImagesUrls;
 
         public static IEnumerable<object> Search(string key) => store.Value
             .Where(item => !string.IsNullOrWhiteSpace(key) && item.Name.ToLower().Contains(key.ToLower()))
