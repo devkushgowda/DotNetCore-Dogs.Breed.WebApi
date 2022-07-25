@@ -3,7 +3,6 @@ using Dogs.Breed.WebApi.ML.Interfaces;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Transforms;
-using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.IO;

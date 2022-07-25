@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using Dogs.Breed.WebApi.HelperClasses;
 using Dogs.Breed.WebApi.ML;
@@ -7,7 +6,6 @@ using Dogs.Breed.WebApi.ML.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.ML;
-using MongoDB.Driver;
 
 namespace Dogs.Breed.WebApi.Controllers
 {
@@ -48,17 +46,10 @@ namespace Dogs.Breed.WebApi.Controllers
         {
 
             var trainingModel = new DogsTrainingEngine();
-            //if (System.IO.File.Exists(trainingModel.ModelOutputPath))
-            //{
-            //    return Ok($"Succesful.\nTrained model already available.");
-            //}
-            //else
-            //{
             DateTime start = DateTime.Now;
             trainingModel.BuildAndSaveModel();
             DateTime end = DateTime.Now;
             return Ok($"Succesful.\nTime taken:{(end - start).TotalSeconds} seconds.");
-            //}
         }
 
         [HttpGet]

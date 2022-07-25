@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using MongoDB.Bson;
+﻿using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Dogs.Breed.WebApi.Models
 {

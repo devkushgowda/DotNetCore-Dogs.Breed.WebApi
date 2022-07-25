@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Dogs.Breed.WebApi.Database
@@ -14,7 +13,7 @@ namespace Dogs.Breed.WebApi.Database
 
         private const string Password = "Kush@143";
 
-        private const string Endpoint = "cluster0.0xitl.mongodb.net/dogstore?retryWrites=true&w=majority";
+        private const string Endpoint = "cluster0.0xitl.mongodb.net/?retryWrites=true&w=majority";
 
         static readonly string CloudConnectionString = $"mongodb+srv://admin:{HttpUtility.UrlEncode(Password)}@{Endpoint}";
 

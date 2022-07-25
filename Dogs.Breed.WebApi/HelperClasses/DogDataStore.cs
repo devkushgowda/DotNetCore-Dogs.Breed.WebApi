@@ -1,11 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using MongoDB.Bson;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Dogs.Breed.WebApi.Database;
 using Dogs.Breed.WebApi.Models;
 
@@ -19,7 +15,8 @@ namespace Dogs.Breed.WebApi.HelperClasses
         {
             var db = MongoDbConnectionStore.GetDb();
             var collection = db.GetCollection<DogModel>(MongoDbConnectionStore.ProfilesCollectionName);
-            return collection.Find(item => true).ToList();
+            var all = collection.Find(item => true).ToList();
+            return all;
         }
 
         public static IEnumerable<DogModel> GetProfiles() => store.Value;
@@ -38,9 +35,9 @@ namespace Dogs.Breed.WebApi.HelperClasses
             var dogProfiles = DogsProfileReader.GetAllProfiles();
             var collection = db.GetCollection<DogModel>(MongoDbConnectionStore.ProfilesCollectionName);
             collection.DeleteMany(_ => true);
-            collection.InsertManyAsync(dogProfiles, new MongoDB.Driver.InsertManyOptions { IsOrdered = true });
+            collection.InsertMany(dogProfiles, new InsertManyOptions { IsOrdered = true });
 
-            //Update stoe with latest data
+            //Update store with latest data
             store.Value.Clear();
             store.Value.AddRange(dogProfiles);
 
